@@ -166,3 +166,38 @@ function Percolation(N) {
     }
 }
 
+// Union-Find class for efficiently managing and checking connections
+function WeightedQuickUnionUF(N) {
+    var parent = [];
+    var size = [];
+    for (var i = 0; i < N; i++) {
+        parent[i] = i;
+        size[i] = 1;
+    }
+
+    function root(i) {
+        while (i != parent[i]) {
+            parent[i] = parent[parent[i]];
+            i = parent[i];
+        }
+        return i;
+    }
+
+    this.union = function (p, q) {
+        var i = root(p);
+        var j = root(q);
+        if (i == j) return;
+
+        if (size[i] < size[j]) {
+            parent[i] = j;
+            size[j] += size[i];
+        } else {
+            parent[j] = i;
+            size[i] += size[j];
+        }
+    }
+
+    this.connected = function (p, q) {
+        return root(p) == root(q);
+    }
+}
