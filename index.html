@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="script.js" defer></script>
+    <script>var interval = null;</script> <!-- This lets me clear the interval to avoid duplicate runs on refresh -->
+</head>
+<body style="direction: ltr; text-align: center;">
+<div id="content">
+
+    <div class="form-wrapper">
+        <form id="inputs">
+            <div>
+                <label>  Matrix dimensions (maximum 400) :  </label>
+                <input type="text" id="gridSize" value="20" maxlength="3" size="3">
+            </div>
+            <div>
+            <label> Select the desired speed : </label><br>
+            Instant<input type="radio" name="speed" value="instant">
+            slow<input type="radio" name="speed" value="slow">
+            Fast<input type="radio" name="speed" value="fast" checked>
+            </div>
+            <div>
+            <button type="button" id="button" onclick="return simulatePercolation()"> Run Simulation </button>
+            </div> 
+        </form>
+        <p id="percolates" style="max-width: 100%; text-align: center; direction: rtl;"></p>
+        <div class="bar-wrapper">
+            <div class="bar">0%</div>
+        </div>
+    </div>
+    <div class="canvas-wrapper">
+        <canvas id="animation" width="400" height="400"></canvas>
+    </div>
+
+</div>
+</body>
+</html>
