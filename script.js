@@ -110,3 +110,59 @@ function simulatePercolation() {
         interval();
     }
 }
+
+// Percolation simulation class
+function Percolation(N) {
+    var size = N;
+    var uf = new WeightedQuickUnionUF(N * N + 2);
+    var topUF = new WeightedQuickUnionUF(N * N + 2);
+    var opened = [];
+    for (var i = 0; i < N * N; i++) {
+        opened[i] = false;
+    }
+
+    function xyTo1D(i, j) {
+        return size * (i - 1) + j;
+    }
+
+    this.open = function (i, j) {
+        opened[xyTo1D(i, j)] = true;
+
+        if (i != 1 && this.isOpen(i - 1, j)) {
+            uf.union(xyTo1D(i, j), xyTo1D(i - 1, j));
+            topUF.union(xyTo1D(i, j), xyTo1D(i - 1, j));
+        }
+        if (i != size && this.isOpen(i + 1, j)) {
+            uf.union(xyTo1D(i, j), xyTo1D(i + 1, j));
+            topUF.union(xyTo1D(i, j), xyTo1D(i + 1, j));
+        }
+        if (j != 1 && this.isOpen(i, j - 1)) {
+            uf.union(xyTo1D(i, j), xyTo1D(i, j - 1));
+            topUF.union(xyTo1D(i, j), xyTo1D(i, j - 1));
+        }
+        if (j != size && this.isOpen(i, j + 1)) {
+            uf.union(xyTo1D(i, j), xyTo1D(i, j + 1));
+            topUF.union(xyTo1D(i, j), xyTo1D(i, j + 1));
+        }
+        if (i == 1) {
+            uf.union(0, xyTo1D(i, j));
+            topUF.union(0, xyTo1D(i, j));
+        }
+        if (i == size) {
+            uf.union(size * size + 1, xyTo1D(i, j));
+        }
+    }
+
+    this.isOpen = function (i, j) {
+        return opened[xyTo1D(i, j)];
+    }
+
+    this.isFull = function (i, j) {
+        return topUF.connected(0, xyTo1D(i, j));
+    }
+
+    this.percolates = function () {
+        return uf.connected(0, size * size + 1);
+    }
+}
+
