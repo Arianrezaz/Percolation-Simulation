@@ -1,0 +1,80 @@
+@font-face {
+    font-family: "Vazir";
+    src: url('./fonts/Vazirmatn-Bold.woff2') format('woff2');
+}
+*{
+    font-family: "Vazir";
+}
+:root{
+    --BackGround: #88aaff;
+}
+canvas {
+    border: 4px solid black;
+    border-radius: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    display: block;
+}
+
+form {
+    width: 400px;
+    padding: 1em;
+    margin: 30px;
+    border: 4px solid var(--BackGround);
+    border-radius: 10px;
+    margin-bottom: 30px; 
+    clear: both;
+}
+
+form div + div {
+    margin-top: 1em;
+}
+
+#gridSize {
+    border-radius: 5px;
+}
+#content{
+    width: 60%;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+}
+#gridSize{
+    border: none;
+    border-bottom: 1px solid #333;
+    outline: none;
+    text-align: center;
+    margin-right: 10px;
+}
+#button{
+    border: none;
+    background-color: var(--BackGround);
+    padding: 10px;
+    border-radius: 2%;
+    cursor: pointer;
+    font-size: 18px;
+}
+.form-wrapper{
+    float: right;
+}
+.canvas-wrapper{
+    float: left;
+}
+.bar-wrapper{
+    width: 85%;
+    border: 2px solid #777;
+    border-radius: 2%;
+    direction: ltr;
+    text-align: center;
+    padding: 5px;
+    margin: 5px auto;
+    display: none;
+}
+.bar{
+    width: 1%;
+    height: 24px;
+    background-color: var(--BackGround);
+    transition: width 1s ease-in;
+}
